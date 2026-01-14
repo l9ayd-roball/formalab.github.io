@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preinscripciones - Instituto TechNova</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: #f0f4f8;
+            color: #333;
+        }
+        
+        header {
+            background: url("https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&fit=crop&w=1350&q=80") center/cover no-repeat;
+            color: #fff;
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            background-attachment: fixed;
+        }
+        
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        header h1,
+        header p {
+            position: relative;
+            z-index: 2;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            font-size: 1.3rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px 60px 20px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #5b86e5;
+            margin: 40px 0 20px 0;
+            border-left: 6px solid #36d1dc;
+            padding-left: 12px;
+            font-weight: 700;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card h3 {
+            color: #36d1dc;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            color: #555;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .date-box {
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-preinscripcion-final {
+            display: block;
+            width: 300px;
+            max-width: 90%;
+            margin: 40px auto;
+            padding: 18px 0;
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: #fff;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .btn-preinscripcion-final:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        footer {
+            margin-top: 60px;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>📅 Preinscripciones 2025-2026</h1>
+        <p>Consulta las fechas y descubre todos nuestros cursos</p>
+    </header>
+
+    <div class="container">
+        <!-- Idiomes (Aula 3) -->
+        <h2 class="section-title">🔹 Idiomes</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://i.postimg.cc/VsZNq9kv/i-Stock-886336016.jpg" alt="Anglès laboral">
+                <div class="card-content">
+                    <h3>Anglès laboral</h3>
+                    <span class="date-box">📅 Del 5 al 15 de maig</span>
+                    <p>Curs per millorar l'anglès en l'àmbit professional.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/rFWKq0qG/vector-illustration-two-hand-drawn-600nw-1038482878.webp" alt="Català per a estrangers">
+                <div class="card-content">
+                    <h3>Català per a estrangers</h3>
+                    <span class="date-box">📅 Del 5 al 15 de maig</span>
+                    <p>Aprèn català des de zero o millora el teu nivell existent.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/Nf1fW3xX/caracter-sticas-del-franc-s.jpg" alt="Francès turístic">
+                <div class="card-content">
+                    <h3>Francès turístic</h3>
+                    <span class="date-box">📅 Del 5 al 15 de maig</span>
+                    <p>Aprèn francès bàsic enfocat al turisme i la comunicació.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Administració i Empresa (Aula 4) -->
+        <h2 class="section-title">🔹 Administració i Empresa</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80" alt="Gestió administrativa i comptabilitat">
+                <div class="card-content">
+                    <h3>Gestió administrativa i comptabilitat</h3>
+                    <span class="date-box">📅 Del 20 al 30 de maig</span>
+                    <p>Curs per aprendre a gestionar administració i comptabilitat empresarial.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://i.postimg.cc/sDR39nRR/gestio-administrativa-M1-Reus-1024x840.jpg" alt="Atenció al client i comunicació empresarial">
+                <div class="card-content">
+                    <h3>Atenció al client i comunicació empresarial</h3>
+                    <span class="date-box">📅 Del 20 al 30 de maig</span>
+                    <p>Millora les teves habilitats en atenció al client i comunicació efectiva.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1200&q=80" alt="Recursos humans i lideratge">
+                <div class="card-content">
+                    <h3>Recursos humans i lideratge</h3>
+                    <span class="date-box">📅 Del 20 al 30 de maig</span>
+                    <p>Aprèn tècniques de gestió de persones i lideratge en l'empresa.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grado Superior -->
+        <h2 class="section-title">🔹 Grado Superior</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80" alt="DAM">
+                <div class="card-content">
+                    <h3>Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+                    <span class="date-box">📅 Del 1 al 10 de junio</span>
+                    <p>Preinscripción para futuros desarrolladores de aplicaciones multiplataforma.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80" alt="DAW">
+                <div class="card-content">
+                    <h3>Desarrollo de Aplicaciones Web (DAW)</h3>
+                    <span class="date-box">📅 Del 1 al 10 de junio</span>
+                    <p>Especialízate en desarrollo web moderno y frameworks actuales.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=1200&q=80" alt="ASIR">
+                <div class="card-content">
+                    <h3>Administración de Sistemas Informáticos en Red (ASIR)</h3>
+                    <span class="date-box">📅 Del 1 al 10 de junio</span>
+                    <p>Curso orientado a la gestión de redes, servidores y ciberseguridad.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- BOTÓN FINAL -->
+        <a href="formulario.html" class="btn-preinscripcion-final">Ir al formulario de preinscripción</a>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Instituto TechNova - Todos los derechos reservados</p>
+    </footer>
+</body>
+
+</html>

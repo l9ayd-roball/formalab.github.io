@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Calendari Escolar 2025–2026 — CalendariEscolar</title>
+    <link rel="icon" href="data:,">
+    <style>
+        /* Reset mínim */
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            color: #223;
+            background: linear-gradient(180deg, #f6f7fb 0%, #ffffff 40%);
+        }
+        /* Contenidor principal */
+        
+        .wrap {
+            max-width: 1200px;
+            margin: 28px auto;
+            padding: 28px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(31, 41, 55, 0.06);
+            border: 1px solid rgba(34, 51, 68, 0.04);
+        }
+        
+        header.top {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        
+        .title {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 64px;
+            height: 64px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffb86b, #ff7a59);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 18px rgba(255, 122, 89, 0.14);
+        }
+        
+        h1 {
+            font-size: 1.35rem;
+            margin: 0;
+            color: #0f1724;
+        }
+        
+        p.sub {
+            margin: 0;
+            color: #5b6b7a;
+            font-size: 0.95rem
+        }
+        /* Controls */
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .btn {
+            background: #fff;
+            border: 1px solid rgba(34, 51, 68, 0.08);
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            transition: all .15s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(34, 51, 68, 0.06);
+        }
+        
+        .btn.primary {
+            background: linear-gradient(90deg, #ff8c42, #ff6a3a);
+            color: #fff;
+            border: 0;
+            box-shadow: 0 8px 22px rgba(255, 106, 58, 0.18);
+        }
+        /* Layout principal */
+        
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 18px;
+            margin-top: 18px;
+        }
+        
+        @media (max-width:980px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Panell esquerre: calendar view */
+        
+        .panel {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        /* View switcher */
+        
+        .viewbar {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        /* Calendari mensual container */
+        
+        .month-view {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        /* Header mes */
+        
+        .month-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .month-title {
+            font-weight: 700;
+            color: #0b1220;
+            font-size: 1.05rem;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        /* Grid del calendari (taula estil) */
+        
+        .calendar {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(34, 51, 68, 0.06);
+        }
+        
+        .calendar .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            background: #f3f6fb;
+            padding: 10px 8px;
+            font-weight: 700;
+            color: #445;
+            font-size: 0.85rem;
+        }
+        
+        .calendar .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0;
+            padding: 8px;
+            background: #fff;
+        }
+        
+        .day {
+            min-height: 78px;
+            padding: 10px;
+            border-right: 1px solid rgba(34, 51, 68, 0.03);
+            border-bottom: 1px solid rgba(34, 51, 68, 0.03);
+            position: relative;
+            background: linear-gradient(180deg, #ffffff, #fffaf8 60%);
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        
+        .day:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 30px rgba(11, 20, 32, 0.06);
+            z-index: 5;
+        }
+        
+        .day.inactive {
+            color: #a2b0bb;
+            background: #fbfbfb;
+            filter: grayscale(.02);
+            opacity: .9;
+        }
+        
+        .date-num {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #0f1724;
+        }
+        
+        .events {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .chip {
+            padding: 4px 6px;
+            border-radius: 8px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            max-width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .chip.festi {
+            background: #ffecec;
+            color: #b33434;
+            border: 1px solid rgba(179, 52, 52, 0.08);
+        }
+        
+        .chip.ji {
+            background: #fff7e6;
+            color: #b36a0b;
+            border: 1px solid rgba(179, 106, 11, 0.06);
+        }
+        
+        .chip.trim {
+            background: #e9fbef;
+            color: #0b8a3a;
+            border: 1px solid rgba(11, 138, 58, 0.06);
+        }
+        /* Panell dret: informacions i llegenda */
+        
+        .side {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .legend {
+            padding: 12px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #ffffff, #fbfdff);
+            border: 1px solid rgba(34, 51, 68, 0.04);
+        }
+        
+        .legend h3 {
+            margin: 0 0 8px 0;
+            font-size: 1rem;
+            color: #0b1220;
+        }
+        
+        .legend-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin: 8px 0;
+        }
+        
+        .swatch {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+        
+        .sw-festi {
+            background: #ffd6d6;
+            border: 1px solid rgba(179, 52, 52, 0.08);
+        }
+        
+        .sw-ji {
+            background: #fff3cf;
+            border: 1px solid rgba(179, 106, 11, 0.06);
+        }
+        
+        .sw-trim {
+            background: #dff8e8;
+            border: 1px solid rgba(11, 138, 58, 0.06);
+        }
+        
+        .info {
+            padding: 14px;
+            border-radius: 12px;
+            background: #fbfbff;
+            border: 1px solid rgba(34, 51, 68, 0.04);
+            color: #344;
+        }
+        
+        .info h3 {
+            margin: 0 0 8px 0;
+            color: #0b1220;
+        }
+        
+        .small {
+            font-size: 0.92rem;
+            color: #475767;
+        }
+        /* Grid complet (veure tot) */
+        
+        .all-grid {
+            display: grid;
+            gap: 14px;
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        @media (max-width:1100px) {
+            .all-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width:640px) {
+            .all-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+        /* Tooltip / popup */
+        
+        .tooltip {
+            position: fixed;
+            pointer-events: none;
+            background: #0b1220;
+            color: #fff;
+            padding: 10px 12px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 30px rgba(11, 20, 32, 0.25);
+            z-index: 9999;
+            transform: translate(-50%, -140%);
+            display: none;
+        }
+        /* Footer */
+        
+        footer {
+            margin-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #5b6b7a;
+            font-size: 0.92rem;
+        }
+        /* Print-friendly adjustments */
+        
+        @media print {
+            body {
+                background: #fff;
+            }
+            .btn,
+            .controls {
+                display: none;
+            }
+            .wrap {
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+            .all-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .day {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="wrap">
+        <div class="card">
+            <header class="top">
+                <div class="title">
+                    <div class="logo">CE</div>
+                    <div>
+                        <h1>Calendari del curs 2025–2026</h1>
+                        <p class="sub">Setembre 2025 — Juliol 2026 · Calendari oficial del centre</p>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn" id="toggleView" title="Veure tot / Navegar">Veure tot</button>
+                    <button class="btn" id="todayBtn" title="Anar al mes actual">Mes actual</button>
+                    <button class="btn primary" id="printBtn" title="Exportar a PDF (imprimir)">Exportar a PDF</button>
+                </div>
+            </header>
+
+            <div class="main-grid">
+                <!-- esquerra -->
+                <div class="panel card" style="padding:16px;">
+                    <div class="viewbar">
+                        <div class="month-header" style="width:100%;gap:12px;align-items:center;">
+                            <div style="display:flex;align-items:center;gap:12px;">
+                                <div class="nav">
+                                    <button class="btn" id="prevMonth">◀</button>
+                                    <button class="btn" id="nextMonth">▶</button>
+                                </div>
+                                <div class="month-title" id="currentMonthTitle">Octubre 2025</div>
+                            </div>
+                            <div style="display:flex;gap:8px;">
+                                <div class="small" id="rangeLabel">Curs: 8 set 2025 — 19 juny 2026</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Container on show single month -->
+                    <div id="singleContainer" class="month-view">
+                        <div class="calendar" id="monthCalendar">
+                            <div class="weekdays" id="weekdaysRow">
+                                <div>Dl</div>
+                                <div>Dt</div>
+                                <div>Dc</div>
+                                <div>Dj</div>
+                                <div>Dv</div>
+                                <div>Ds</div>
+                                <div>Dg</div>
+                            </div>
+                            <div class="days" id="daysGrid"></div>
+                        </div>
+                    </div>
+
+                    <!-- All months grid (hidden by default) -->
+                    <div id="allContainer" style="display:none;">
+                        <div class="all-grid" id="allGrid"></div>
+                    </div>
+
+                    <footer>
+                        <div>© Centre Educatiu · Calendari 25–26</div>
+                        <div style="opacity:.8">Formalab</div>
+                    </footer>
+                </div>
+
+                <!-- dreta -->
+                <aside class="side">
+                    <div class="legend card">
+                        <h3>Llegenda</h3>
+                        <div class="legend-row">
+                            <div class="swatch sw-festi"></div>
+                            <div>🔴 Festiu</div>
+                        </div>
+                        <div class="legend-row">
+                            <div class="swatch sw-ji"></div>
+                            <div>🟡 Jornada intensiva</div>
+                        </div>
+                        <div class="legend-row">
+                            <div class="swatch sw-trim"></div>
+                            <div>🟢 Inici / final de trimestre</div>
+                        </div>
+                    </div>
+
+                    <div class="info card">
+                        <h3>Informació del curs</h3>
+                        <p class="small"><strong>Inici de curs:</strong> 8 de setembre de 2025</p>
+                        <p class="small"><strong>Jornada intensiva:</strong> 19 de desembre de 2025 i del 9 al 19 de juny de 2026</p>
+                        <p class="small"><strong>Trimestres:</strong><br> 1r: 8 set — 19 des 2025<br> 2n: 8 gen — 27 març 2026<br> 3r: 7 abr — 19 juny 2026
+                        </p>
+                    </div>
+
+                    <div class="card" style="padding:12px;">
+                        <h3 style="margin:0 0 8px 0;">Accions</h3>
+                        <div style="display:flex;flex-direction:column;gap:8px;">
+                            <button class="btn" id="toggleLegend">Ocultar/Mostrar llegenda</button>
+                            <button class="btn" id="downloadIcs">Descarregar .ics (eventos)</button>
+                            <a class="btn" id="toggleInfo" href="#info">Més informació</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
+
+    <script>
+        /* === Dades d'esdeveniments (festius, jornada intensiva, inici/final trimestre) ===
+                                   Format ISO: 'YYYY-MM-DD'
+                                */
+        const events = [
+            /* Festius */
+            {
+                date: '2025-09-11',
+                title: 'Festí 11 de setembre',
+                type: 'festi'
+            }, {
+                date: '2025-11-03',
+                title: 'Festí 3 de novembre',
+                type: 'festi'
+            }, {
+                date: '2025-12-05',
+                title: 'Festí 5 de desembre',
+                type: 'festi'
+            }, {
+                date: '2025-12-08',
+                title: 'Festí 8 de desembre',
+                type: 'festi'
+            }, {
+                date: '2026-02-16',
+                title: 'Festí 16 de febrer',
+                type: 'festi'
+            }, {
+                date: '2026-03-06',
+                title: 'Festí 6 de març',
+                type: 'festi'
+            }, {
+                date: '2026-04-30',
+                title: 'Festí 30 d\'abril',
+                type: 'festi'
+            }, {
+                date: '2026-05-01',
+                title: 'Festí 1 de maig',
+                type: 'festi'
+            }, {
+                date: '2026-05-25',
+                title: 'Festí 25 de maig',
+                type: 'festi'
+            },
+
+            /* Jornada intensiva */
+            {
+                date: '2025-12-19',
+                title: 'Jornada intensiva (19 de desembre)',
+                type: 'ji'
+            },
+            // 9->19 juny 2026 inclusive
+            {
+                date: '2026-06-09',
+                title: 'Jornada intensiva (inici)',
+                type: 'ji'
+            }, {
+                date: '2026-06-10',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-11',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-12',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-13',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-14',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-15',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-16',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-17',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-18',
+                title: 'Jornada intensiva',
+                type: 'ji'
+            }, {
+                date: '2026-06-19',
+                title: 'Jornada intensiva (fi)',
+                type: 'ji'
+            },
+
+            /* Inicis / finals de trimestre */
+            {
+                date: '2025-09-08',
+                title: 'Inici 1r trimestre',
+                type: 'trim'
+            }, {
+                date: '2025-12-19',
+                title: 'Final 1r trimestre',
+                type: 'trim'
+            }, // coincideix amb jornada intensiva
+            {
+                date: '2026-01-08',
+                title: 'Inici 2n trimestre',
+                type: 'trim'
+            }, {
+                date: '2026-03-27',
+                title: 'Final 2n trimestre',
+                type: 'trim'
+            }, {
+                date: '2026-04-07',
+                title: 'Inici 3r trimestre',
+                type: 'trim'
+            }, {
+                date: '2026-06-19',
+                title: 'Final 3r trimestre',
+                type: 'trim'
+            }
+        ];
+
+        /* Configuració de període del curs: de setembre 2025 a juliol 2026 */
+        const startYear = 2025,
+            startMonth = 8; // JS 0-based: 8 = setembre
+        const endYear = 2026,
+            endMonth = 6; // 6 = juliol
+
+        /* Estat */
+        let viewAll = false;
+        let displayedYear = 2025;
+        let displayedMonth = 8; // setembre 2025
+
+        /* Utilities */
+        function iso(date) {
+            if (!date) return '';
+            const y = date.getFullYear();
+            const m = (date.getMonth() + 1).toString().padStart(2, '0');
+            const d = date.getDate().toString().padStart(2, '0');
+            return `${y}-${m}-${d}`;
+        }
+
+        function parseISO(s) {
+            const parts = s.split('-').map(Number);
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+        }
+
+        function formatMonthTitle(year, month) {
+            const d = new Date(year, month, 1);
+            return d.toLocaleString('ca-ES', {
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        /* Map de esdeveniments per dia */
+        const eventsMap = {};
+        for (const ev of events) {
+            eventsMap[ev.date] = eventsMap[ev.date] || [];
+            eventsMap[ev.date].push(ev);
+        }
+
+        /* Generador de dies per a un mes */
+        function generateMonthGrid(year, month) {
+            const first = new Date(year, month, 1);
+            const startDay = first.getDay(); // 0 domenica .. 6 dissabte  (but in Catalan week starts Monday)
+            // convert JS day (0 Sun..6 Sat) to index where Monday=0:
+            const leading = (startDay + 6) % 7; // nombre de cel·les abans del dia 1
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const prevMonthDays = new Date(year, month, 0).getDate();
+
+            const cells = [];
+            // leading days from prev month
+            for (let i = leading - 1; i >= 0; i--) {
+                const d = prevMonthDays - i;
+                const dateObj = new Date(year, month - 1, d);
+                cells.push({
+                    date: dateObj,
+                    inactive: true
+                });
+            }
+            // days current month
+            for (let d = 1; d <= daysInMonth; d++) {
+                const dateObj = new Date(year, month, d);
+                cells.push({
+                    date: dateObj,
+                    inactive: false
+                });
+            }
+            // trailing days for next month to fill 7*rows
+            while (cells.length % 7 !== 0) {
+                const nextDay = cells.length - (leading + daysInMonth) + 1;
+                const dateObj = new Date(year, month + 1, nextDay);
+                cells.push({
+                    date: dateObj,
+                    inactive: true
+                });
+            }
+            return cells;
+        }
+
+        /* Render single month */
+        function renderMonth(year, month) {
+            document.getElementById('currentMonthTitle').textContent = formatMonthTitle(year, month);
+            const daysGrid = document.getElementById('daysGrid');
+            daysGrid.innerHTML = '';
+            const cells = generateMonthGrid(year, month);
+            for (const c of cells) {
+                const dISO = iso(c.date);
+                const cell = document.createElement('div');
+                cell.className = 'day' + (c.inactive ? ' inactive' : '');
+                cell.dataset.date = dISO;
+
+                const num = document.createElement('div');
+                num.className = 'date-num';
+                num.textContent = c.date.getDate();
+                cell.appendChild(num);
+
+                const evs = eventsMap[dISO] || [];
+                if (evs.length) {
+                    const evContainer = document.createElement('div');
+                    evContainer.className = 'events';
+                    evs.slice(0, 3).forEach(ev => {
+                        const chip = document.createElement('div');
+                        chip.className = 'chip ' + (ev.type === 'festi' ? 'festi' : ev.type === 'ji' ? 'ji' : 'trim');
+                        chip.textContent = ev.title;
+                        evContainer.appendChild(chip);
+                    });
+                    if (evs.length > 3) {
+                        const more = document.createElement('div');
+                        more.className = 'chip';
+                        more.textContent = `+${evs.length-3} més`;
+                        evContainer.appendChild(more);
+                    }
+                    cell.appendChild(evContainer);
+                }
+
+                // interactions (hover tooltip + click open details)
+                cell.addEventListener('mouseenter', (e) => showTooltip(e, dISO));
+                cell.addEventListener('mousemove', (e) => moveTooltip(e));
+                cell.addEventListener('mouseleave', hideTooltip);
+                cell.addEventListener('click', () => openDayModal(dISO));
+
+                daysGrid.appendChild(cell);
+            }
+        }
+
+        /* Render all months grid */
+        function renderAll() {
+            const allGrid = document.getElementById('allGrid');
+            allGrid.innerHTML = '';
+            // iterate months from start to end inclusive
+            let y = startYear,
+                m = startMonth;
+            while (y < endYear || (y === endYear && m <= endMonth)) {
+                const box = document.createElement('div');
+                box.className = 'card';
+                box.style.padding = '12px';
+                // title
+                const title = document.createElement('div');
+                title.style.fontWeight = '700';
+                title.style.marginBottom = '8px';
+                title.textContent = formatMonthTitle(y, m);
+                box.appendChild(title);
+
+                // small calendar inside
+                const cal = document.createElement('div');
+                cal.className = 'calendar';
+                cal.style.marginBottom = '0';
+                // weekdays
+                const wk = document.createElement('div');
+                wk.className = 'weekdays';
+                ['Dl', 'Dt', 'Dc', 'Dj', 'Dv', 'Ds', 'Dg'].forEach(t => {
+                    const c = document.createElement('div');
+                    c.textContent = t;
+                    wk.appendChild(c);
+                });
+                cal.appendChild(wk);
+                // days
+                const days = document.createElement('div');
+                days.className = 'days';
+                const cells = generateMonthGrid(y, m);
+                cells.forEach(c => {
+                    const dISO = iso(c.date);
+                    const dayDiv = document.createElement('div');
+                    dayDiv.className = 'day' + (c.inactive ? ' inactive' : '');
+                    dayDiv.style.minHeight = '64px';
+                    const num = document.createElement('div');
+                    num.className = 'date-num';
+                    num.textContent = c.date.getDate();
+                    num.style.fontSize = '0.85rem';
+                    dayDiv.appendChild(num);
+                    const evs = eventsMap[dISO] || [];
+                    if (evs.length) {
+                        const evContainer = document.createElement('div');
+                        evContainer.className = 'events';
+                        evs.slice(0, 2).forEach(ev => {
+                            const chip = document.createElement('div');
+                            chip.className = 'chip ' + (ev.type === 'festi' ? 'festi' : ev.type === 'ji' ? 'ji' : 'trim');
+                            chip.textContent = ev.title;
+                            chip.style.fontSize = '0.7rem';
+                            evContainer.appendChild(chip);
+                        });
+                        dayDiv.appendChild(evContainer);
+                    }
+                    dayDiv.addEventListener('mouseenter', e => showTooltip(e, dISO));
+                    dayDiv.addEventListener('mousemove', moveTooltip);
+                    dayDiv.addEventListener('mouseleave', hideTooltip);
+                    dayDiv.addEventListener('click', () => openDayModal(dISO));
+                    days.appendChild(dayDiv);
+                });
+                cal.appendChild(days);
+                box.appendChild(cal);
+                allGrid.appendChild(box);
+
+                // next month
+                m++;
+                if (m > 11) {
+                    m = 0;
+                    y++;
+                }
+            }
+        }
+
+        /* Tooltip handling */
+        const tooltip = document.getElementById('tooltip');
+
+        function showTooltip(e, dateISO) {
+            const evs = eventsMap[dateISO] || [];
+            let content = `<strong>${dateISO}</strong>`;
+            if (evs.length) {
+                content = `<strong>${dateISO}</strong><br/>`;
+                evs.forEach(ev => {
+                    content += `<div style="margin-top:6px;">${ev.type==='festi' ? '🔴' : ev.type==='ji' ? '🟡' : '🟢'} ${ev.title}</div>`;
+                });
+            } else {
+                content = `<strong>${dateISO}</strong><div style="margin-top:6px;color:#cbd5e1">Cap esdeveniment</div>`;
+            }
+            tooltip.innerHTML = content;
+            tooltip.style.display = 'block';
+            moveTooltip(e);
+        }
+
+        function moveTooltip(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            tooltip.style.left = x + 'px';
+            tooltip.style.top = y + 'px';
+        }
+
+        function hideTooltip() {
+            tooltip.style.display = 'none';
+        }
+
+        /* Modal o detall simple (alert) - podem millorar després */
+        function openDayModal(dateISO) {
+            const evs = eventsMap[dateISO] || [];
+            let msg = `${dateISO}\n\n`;
+            if (evs.length) {
+                evs.forEach(ev => msg += `- ${ev.title}\n`);
+            } else {
+                msg += 'Cap esdeveniment.\n';
+            }
+            alert(msg);
+        }
+
+        /* Controls i interaccions */
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            displayedMonth--;
+            if (displayedMonth < 0) {
+                displayedMonth = 11;
+                displayedYear--;
+            }
+            renderMonth(displayedYear, displayedMonth);
+        });
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            displayedMonth++;
+            if (displayedMonth > 11) {
+                displayedMonth = 0;
+                displayedYear++;
+            }
+            renderMonth(displayedYear, displayedMonth);
+        });
+        document.getElementById('toggleView').addEventListener('click', () => {
+            viewAll = !viewAll;
+            document.getElementById('allContainer').style.display = viewAll ? 'block' : 'none';
+            document.getElementById('singleContainer').style.display = viewAll ? 'none' : 'block';
+            document.getElementById('toggleView').textContent = viewAll ? 'Veure mes' : 'Veure tot';
+            if (viewAll) renderAll();
+            else renderMonth(displayedYear, displayedMonth);
+        });
+        document.getElementById('todayBtn').addEventListener('click', () => {
+            const t = new Date();
+            displayedYear = t.getFullYear();
+            displayedMonth = t.getMonth();
+            renderMonth(displayedYear, displayedMonth);
+        });
+        document.getElementById('printBtn').addEventListener('click', () => {
+            window.print();
+        });
+        document.getElementById('toggleLegend').addEventListener('click', () => {
+            const leg = document.querySelector('.legend');
+            leg.style.display = (leg.style.display === 'none') ? 'block' : 'none';
+        });
+        document.getElementById('downloadIcs').addEventListener('click', () => {
+            const ics = buildICS(events);
+            const blob = new Blob([ics], {
+                type: 'text/calendar'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'calendari_escolar_25-26.ics';
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        /* ICS generator simple */
+        function buildICS(eventsList) {
+            let out = 'BEGIN:VCALENDAR\\r\\nVERSION:2.0\\r\\nPRODID:-//CalendariEscola//EN\\r\\n';
+            for (const ev of eventsList) {
+                const start = ev.date.replace(/-/g, '') + 'T090000';
+                out += 'BEGIN:VEVENT\\r\\n';
+                out += 'UID:' + (Math.random().toString(36).substr(2, 9)) + '@calendari.es\\r\\n';
+                out += 'DTSTAMP:' + (new Date().toISOString().replace(/[-:]/g, '').split('.')[0]) + 'Z\\r\\n';
+                out += 'DTSTART;VALUE=DATE:' + ev.date.replace(/-/g, '') + '\\r\\n';
+                out += 'SUMMARY:' + ev.title.replace(/[\\n\\r]+/g, ' ') + '\\r\\n';
+                out += 'END:VEVENT\\r\\n';
+            }
+            out += 'END:VCALENDAR';
+            return out;
+        }
+
+        /* Inicialització */
+        (function init() {
+            displayedYear = startYear;
+            displayedMonth = startMonth;
+            renderMonth(displayedYear, displayedMonth);
+        })();
+    </script>
+
+</body>
+
+</html>

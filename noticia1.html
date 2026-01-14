@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícia - Sortida a Barcelona | Institut FormaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        header {
+            background: linear-gradient(90deg, #ff4e50, #f9d423);
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #ff4e50;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        .date {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 30px;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .gallery img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        a.back {
+            display: inline-block;
+            margin-top: 40px;
+            background: #ff4e50;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        
+        a.back:hover {
+            background: #f9d423;
+            color: #222;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: #111;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        Institut FormaLab - Notícies
+    </header>
+
+    <div class="container">
+        <h1>Sortida a Barcelona</h1>
+        <div class="date">05 Octubre 2025</div>
+
+        <p>L’alumnat de Grau Mitjà ha viscut una experiència única en la seva sortida cultural a Barcelona. La jornada va començar amb una visita al <strong>Museu de la Ciència</strong>, on van poder experimentar amb exposicions interactives i aprendre de
+            manera pràctica conceptes relacionats amb la tecnologia i la innovació.</p>
+
+        <p>Posteriorment, es va visitar el <strong>Museu Nacional de la Tecnologia</strong>, on l’alumnat va descobrir com la tecnologia ha anat transformant la societat al llarg del temps. Les activitats van estar guiades per professionals del sector, que
+            van motivar l’interès i la participació activa dels estudiants.</p>
+
+        <p>A més, els alumnes van gaudir d’un temps lliure per explorar alguns racons emblemàtics de la ciutat, reforçant la cohesió de grup i afavorint la convivència.</p>
+
+        <div class="gallery">
+            <img src="https://i.postimg.cc/NFh7gtbw/DSCN5083-scaled.jpg" alt="Visita Museu Ciència">
+            <img src="https://i.postimg.cc/Dy6sN1Vs/DSCN5447-scaled.jpg" alt="Museu Tecnologia">
+            <img src="https://i.postimg.cc/kGf4TFV5/sortida-sol.jpg" alt="Alumnes activitat">
+        </div>
+
+        <a href="index.html" class="back">← Tornar a notícies</a>
+    </div>
+
+    <footer>
+        © 2025 INS FormaLab. Tots els drets reservats.
+    </footer>
+
+</body>
+
+</html>
