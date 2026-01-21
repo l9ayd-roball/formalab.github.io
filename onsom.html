@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On som - Instituto Institut FormaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: #f9f9fb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #ff4e50, #f9d423);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .card h2 {
+            color: #ff4e50;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+        
+        .card p,
+        .card a {
+            font-size: 1rem;
+            color: #555;
+            margin: 6px 0;
+            text-decoration: none;
+        }
+        
+        .map {
+            margin: 40px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2);
+        }
+        
+        .centres {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        .centres h2 {
+            color: #f9a825;
+            margin-bottom: 15px;
+        }
+        
+        .centres ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .centres li {
+            background: #f0f2f5;
+            margin: 8px 0;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+        
+        .centres li:hover {
+            background: #ffecd2;
+            transform: translateX(5px);
+        }
+        
+        footer {
+            margin-top: 40px;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>📍 On Som</h1>
+    </header>
+
+    <div class="container">
+        <!-- Información -->
+        <div class="info">
+            <div class="card">
+                <h2>Institut Institut FormaLab</h2>
+                <p>Carrer de Xavier Puig i Andreu, 7<br>25005 Lleida</p>
+            </div>
+
+            <div class="card">
+                <h2>Contacto</h2>
+                <p>Tel.: <a href="tel:+34900000000">900 000 000</a></p>
+                <p>Email: <a href="formalab@forma.lab">formalab@forma.lab</a></p>
+            </div>
+        </div>
+
+        <!-- Mapa -->
+        <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2970.392015318356!2d0.889789!3d41.633115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a720f51c4e7a7f%3A0x1234567890abcdef!2sInstitut%20Formalab!5e0!3m2!1ses!2ses!4v1695050000000!5m2!1ses!2ses"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+
+        <!-- Centres adscrits -->
+        <div class="centres">
+            <h2>🏫 Centres adscrits</h2>
+            <ul>
+                <li>PTT Institut FormaLab</li>
+                <li>PTT Lleida</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Instituto Institut FormaLab - On Som</p>
+    </footer>
+</body>
+
+</html>

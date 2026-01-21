@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulari d'incidències - Institut Formalab</title>
+    <style>
+        /* ---------- ESTIL GENERAL ---------- */
+        
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #f0f2f5, #d9e2ec);
+            /* Fondo elegante */
+            color: #333;
+        }
+        
+        header {
+            background-color: #1a237e;
+            /* Azul oscuro profesional */
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+            letter-spacing: 1px;
+        }
+        
+        header p {
+            margin-top: 5px;
+            color: #ffca28;
+            /* Naranja suave para acento */
+            font-weight: 500;
+        }
+        
+        form {
+            max-width: 900px;
+            background-color: #ffffff;
+            margin: 50px auto 70px auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+        
+        form:hover {
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: #1a237e;
+            border-bottom: 3px solid #ffca28;
+            padding-bottom: 8px;
+            font-weight: 600;
+        }
+        /* ---------- CAMPOS ---------- */
+        
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a237e;
+        }
+        
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid #c5cae9;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input:focus,
+        textarea:focus,
+        select:focus {
+            border-color: #ffca28;
+            box-shadow: 0 0 6px rgba(255, 202, 40, 0.3);
+            outline: none;
+        }
+        
+        textarea {
+            min-height: 160px;
+            resize: vertical;
+        }
+        /* ---------- BOTONES ---------- */
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn-submit,
+        .btn-home {
+            flex: 1;
+            padding: 15px;
+            font-size: 1.1rem;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .btn-submit {
+            background: #1a237e;
+            color: white;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+        }
+        
+        .btn-submit:hover {
+            background: #3949ab;
+            box-shadow: 0 6px 20px rgba(26, 35, 126, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .btn-home {
+            background: #ffca28;
+            color: #1a237e;
+            box-shadow: 0 4px 15px rgba(255, 202, 40, 0.4);
+        }
+        
+        .btn-home:hover {
+            background: #ffc107;
+            box-shadow: 0 6px 20px rgba(255, 202, 40, 0.5);
+            transform: translateY(-2px);
+        }
+        /* ---------- RESPONSIVO ---------- */
+        
+        @media (max-width: 600px) {
+            form {
+                padding: 30px;
+            }
+            header h1 {
+                font-size: 1.8rem;
+            }
+            .form-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Institut Formalab</h1>
+        <p>Formulari d'incidències</p>
+    </header>
+
+    <form>
+        <div class="section-title">Dades personals</div>
+
+        <div class="form-group">
+            <div>
+                <label for="nom">* Nom</label>
+                <input type="text" id="nom" required>
+            </div>
+            <div>
+                <label for="cognoms">* Cognoms</label>
+                <input type="text" id="cognoms" required>
+            </div>
+            <div>
+                <label for="nif">* NIF / NIE</label>
+                <input type="text" id="nif" required>
+            </div>
+            <div>
+                <label for="edat">Edat</label>
+                <select id="edat">
+        <option value="">---</option>
+        <option>18-25</option>
+        <option>26-40</option>
+        <option>41-60</option>
+        <option>61+</option>
+      </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label for="adreca">* Adreça postal completa</label>
+                <input type="text" id="adreca" required>
+            </div>
+            <div>
+                <label for="cp">* Codi Postal</label>
+                <input type="text" id="cp" required>
+            </div>
+            <div>
+                <label for="districte">Districte</label>
+                <input type="text" id="districte">
+            </div>
+            <div>
+                <label for="poblacio">* Població</label>
+                <input type="text" id="poblacio" required>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <label for="tel1">Telèfon 1</label>
+                <input type="tel" id="tel1">
+            </div>
+            <div>
+                <label for="tel2">Telèfon 2</label>
+                <input type="tel" id="tel2">
+            </div>
+            <div>
+                <label for="email">* Correu electrònic</label>
+                <input type="email" id="email" required>
+            </div>
+        </div>
+
+        <div class="section-title">Queixa</div>
+        <div class="form-group">
+            <div style="grid-column: 1 / -1;">
+                <label for="queixa">* Exposició dels fets i queixa que formula</label>
+                <textarea id="queixa" required></textarea>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">Enviar queixa</button>
+            <a href="index.html" class="btn-home">Tornar a la pàgina principal</a>
+        </div>
+    </form>
+
+</body>
+
+</html>

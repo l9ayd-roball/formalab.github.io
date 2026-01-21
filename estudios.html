@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudios - Institut FormaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background: #f9f9fb;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: #fff;
+            padding: 50px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        header h1 {
+            font-size: 2.7rem;
+            font-weight: 700;
+        }
+        
+        header p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 1.9rem;
+            color: #5b86e5;
+            margin: 40px 0 20px 0;
+            border-left: 6px solid #36d1dc;
+            padding-left: 10px;
+        }
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            max-width: 90px;
+            margin-bottom: 15px;
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            color: #36d1dc;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .card button {
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .card button:hover {
+            background: linear-gradient(to right, #5b86e5, #36d1dc);
+        }
+        
+        .extra-info {
+            display: none;
+            text-align: left;
+            margin-top: 15px;
+            padding: 15px;
+            border-top: 2px dashed #36d1dc;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .extra-info h4 {
+            margin-bottom: 8px;
+            color: #5b86e5;
+        }
+        
+        .extra-info ul {
+            margin-left: 20px;
+            list-style: square;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        footer {
+            margin-top: 40px;
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>🎓 Nuestros Estudios</h1>
+        <p>Explora todas las oportunidades de formación en Institut FormaLab</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Administració i Empresa -->
+        <h2 class="section-title">🔹 Administració i Empresa </h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png" alt="Administración">
+                <h3>Gestió administrativa i comptabilitat</h3>
+                <p>Fonaments per a la gestió econòmica i administrativa.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2645/2645897.png" alt="Clientes">
+                <h3>Atenció al client</h3>
+                <p>Comunicació empresarial i servei al client.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3185/3185079.png" alt="RRHH">
+                <h3>Recursos humans i lideratge</h3>
+                <p>Gestió de persones i tècniques de lideratge.</p>
+            </div>
+        </div>
+
+        <!--  -->
+        <h2 class="section-title">🔹 Informática</h2>
+        <div class="cards">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103658.png" alt="DAM">
+                <h3>Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+                <p>Diseño y programación de apps para PC y móviles.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/2103/2103665.png" alt="DAW">
+                <h3>Desarrollo de Aplicaciones Web (DAW)</h3>
+                <p>Especialízate en programación y diseño de sitios web.</p>
+            </div>
+
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/3190/3190625.png" alt="ASIR">
+                <h3>Administración de Sistemas Informáticos en Red (ASIR)</h3>
+                <p>Formación avanzada en redes, sistemas y ciberseguridad.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Institut FormaLab - Estudios</p>
+    </footer>
+</body>
+
+</html>

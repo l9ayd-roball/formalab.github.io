@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portes Obertes - Instituto Institut FormaLab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #f4f6f9;
+            color: #333;
+        }
+        /* Header */
+        
+        header {
+            background: linear-gradient(rgba(54, 209, 220, 0.7), rgba(91, 134, 229, 0.7)), url('https://images.unsplash.com/photo-1581093588401-5d7f88e541bb?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: #fff;
+            text-align: center;
+            padding: 120px 20px;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.5);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            margin-bottom: 60px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: #36d1dc;
+            border-left: 6px solid #5b86e5;
+            padding-left: 15px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: #36d1dc;
+            border-radius: 2px;
+        }
+        /* Timeline */
+        
+        .timeline {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .timeline-event {
+            background: #fff;
+            padding: 20px 25px;
+            border-left: 5px solid #36d1dc;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+        }
+        
+        .timeline-event span {
+            font-weight: bold;
+            color: #36d1dc;
+        }
+        
+        .timeline-event p {
+            margin-top: 5px;
+            color: #555;
+        }
+        /* Cards actividades */
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .card-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .card-content h3 {
+            color: #36d1dc;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .card-content p {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        footer {
+            background: #222;
+            color: #fff;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🏫 Portes Obertes 2025-2026</h1>
+        <p>Ven a conocer nuestro instituto, descubre nuestros ciclos y vive una experiencia Institut FormaLab</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Fechas y horarios -->
+        <div class="section">
+            <h2 class="section-title">📅 Fechas y Horarios</h2>
+            <div class="timeline">
+                <div class="timeline-event"><span>Sábado 4 de octubre 2025:</span> 10:00h - 13:00h</div>
+                <div class="timeline-event"><span>Miércoles 8 de octubre 2025:</span> 17:00h - 20:00h</div>
+                <div class="timeline-event"><span>Sábado 18 de octubre 2025:</span> 10:00h - 13:00h</div>
+                <div class="timeline-event"><span>Miércoles 22 de octubre 2025:</span> 17:00h - 20:00h</div>
+            </div>
+        </div>
+
+        <!-- Actividades destacadas -->
+        <div class="section">
+            <h2 class="section-title">✨ Actividades durante las puertas abiertas</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="https://i.postimg.cc/yx6NZr3Q/Logo-blanco-Mesa-de-trabajo-1-copia-removebg-preview.png" alt="Visitas guiadas">
+                    <div class="card-content">
+                        <h3>Visitas Guiadas</h3>
+                        <p>Recorre nuestras instalaciones, laboratorios y talleres acompañados de nuestros docentes.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://i.postimg.cc/VvHzbs8v/imagen-cursos-de-formacion-1-500x250-removebg-preview.png" alt="Charlas informativas">
+                    <div class="card-content">
+                        <h3>Charlas Informativas</h3>
+                        <p>Conoce toda la información sobre la Informática y resuelve tus dudas en directo.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://i.postimg.cc/3NWT7MvT/1285abe6-7d24-407c-a054-9b366bbae7e8-300x300-removebg-preview.png" alt="Demostraciones prácticas">
+                    <div class="card-content">
+                        <h3>Demostraciones Prácticas</h3>
+                        <p>Participa en talleres interactivos y actividades prácticas de programación, redes y administración de sistemas.</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://i.postimg.cc/nz2DgmvW/estudiantes-lindos-clase-escuela-679557-2029.avif" alt="Encuentro con alumnos">
+                    <div class="card-content">
+                        <h3>Encuentro con Alumnos</h3>
+                        <p>Conoce a nuestros estudiantes y escucha sus experiencias sobre los distintos ciclos formativos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información extra -->
+        <div class="section">
+            <h2 class="section-title">📌 Información adicional</h2>
+            <div class="timeline">
+                <div class="timeline-event"><span>Inscripciones:</span> Abiertas en línea y en secretaría durante las jornadas de puertas abiertas.</div>
+                <div class="timeline-event"><span>Contacto:</span> Tel: 900 000 000 | Email: formalab@forma.lab</div>
+                <div class="timeline-event"><span>Ubicación:</span> Carretera de LLeida, km 1,1 - 25112 Gimenells</div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Instituto Institut FormaLab - Portes Obertes</p>
+    </footer>
+
+</body>
+
+</html>

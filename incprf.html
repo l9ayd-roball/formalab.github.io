@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="ca">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Control d'Incidències - Xarxa</title>
+    <style>
+        /* Reset + basic layout */
+        
+         :root {
+            --bg: #f7f8fb;
+            --card: #ffffff;
+            --muted: #6b7280;
+            --accent: #4f46e5;
+            --success: #16a34a;
+            --danger: #dc2626
+        }
+        
+        * {
+            box-sizing: border-box
+        }
+        
+        body {
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+            line-height: 1.4;
+            margin: 0;
+            background: linear-gradient(180deg, var(--bg), #fff);
+            color: #111
+        }
+        
+        .container {
+            max-width: 1100px;
+            margin: 28px auto;
+            padding: 20px
+        }
+        
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 1.5rem
+        }
+        
+        p.lead {
+            margin: 4px 0 0;
+            color: var(--muted);
+            font-size: 0.95rem
+        }
+        /* Buttons */
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: #fff;
+            box-shadow: 0 6px 18px rgba(79, 70, 229, 0.12)
+        }
+        
+        .btn-ghost {
+            background: #fff;
+            border: 1px solid #e6e6f0;
+            color: #111
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: #fff
+        }
+        /* Layout grid */
+        
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 18px;
+            margin-top: 18px
+        }
+        
+        .card {
+            background: var(--card);
+            padding: 16px;
+            border-radius: 14px;
+            box-shadow: 0 6px 24px rgba(15, 23, 42, 0.04)
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px
+        }
+        
+        select,
+        input,
+        textarea {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #e6e6f0
+        }
+        /* table */
+        
+        .table-wrap {
+            overflow: auto
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse
+        }
+        
+        th,
+        td {
+            padding: 10px 8px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.95rem
+        }
+        
+        th {
+            color: var(--muted);
+            font-size: 0.8rem
+        }
+        
+        td.id {
+            font-family: ui-monospace, monospace;
+            font-size: 0.85rem;
+            color: #374151
+        }
+        /* badges */
+        
+        .badge {
+            display: inline-block;
+            padding: 6px 8px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.78rem
+        }
+        
+        .b-critical {
+            background: rgba(220, 38, 38, 0.12);
+            color: var(--danger)
+        }
+        
+        .b-high {
+            background: rgba(249, 115, 22, 0.12);
+            color: #f97316
+        }
+        
+        .b-med {
+            background: rgba(250, 204, 21, 0.12);
+            color: #ca8a04
+        }
+        
+        .b-low {
+            background: rgba(16, 185, 129, 0.12);
+            color: var(--success)
+        }
+        
+        .status-res {
+            background: rgba(16, 185, 129, 0.08);
+            color: var(--success);
+            padding: 6px 8px;
+            border-radius: 8px
+        }
+        
+        .status-proc {
+            background: rgba(250, 204, 21, 0.08);
+            color: #b45309;
+            padding: 6px 8px;
+            border-radius: 8px
+        }
+        
+        .status-new {
+            background: rgba(79, 70, 229, 0.06);
+            color: var(--accent);
+            padding: 6px 8px;
+            border-radius: 8px
+        }
+        /* form */
+        
+        form .row {
+            display: flex;
+            gap: 8px
+        }
+        
+        form .col {
+            flex: 1
+        }
+        /* small UI */
+        
+        .meta {
+            font-size: 0.85rem;
+            color: var(--muted)
+        }
+        
+        footer {
+            margin-top: 14px;
+            color: var(--muted);
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between
+        }
+        /* animations */
+        
+        .fade-in {
+            animation: fadein .45s ease both
+        }
+        
+        @keyframes fadein {
+            from {
+                opacity: 0;
+                transform: translateY(6px)
+            }
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+        /* responsive */
+        
+        @media(max-width:900px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .container {
+                padding: 12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Control d'Incidències</h1>
+                <p class="lead">Registre d'incidències amb SLA, respostes ràpides i exportació. Guarda localment o exporta CSV.</p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center">
+                <button id="newBtn" class="btn btn-primary">+ Nova incidència</button>
+                <button id="exportBtn" class="btn btn-success">Exportar CSV</button>
+            </div>
+        </header>
+
+        <div class="grid">
+            <main>
+                <div class="card">
+                    <div style="display:flex;align-items:center;justify-content:space-between">
+                        <div>
+                            <div class="meta">Llistat d'incidències</div>
+                            <strong id="count">3</strong>
+                        </div>
+                        <div class="meta">SLA: <span style="font-weight:700">Crítica &lt;30m resposta / &lt;4h solució</span></div>
+                    </div>
+
+                    <div style="margin-top:12px" class="filters">
+                        <select id="filterAula"><option value="Totes">Totes les Aules</option></select>
+                        <select id="filterTipo"><option value="Tots">Tots els Tipus</option><option value="red">Red</option><option value="impresora">Impresora</option><option value="wifi">Wi-Fi</option><option value="server">Server</option></select>
+                        <select id="filterEstado"><option value="Tots">Tots els Estats</option><option value="Nova">Nova</option><option value="En procés">En procés</option><option value="Resuelta">Resuelta</option></select>
+                        <button id="resetFilters" class="btn btn-ghost">Restableix</button>
+                    </div>
+
+                    <div style="margin-top:12px" class="table-wrap">
+                        <table id="tbl">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Data</th>
+                                    <th>Aula</th>
+                                    <th>Usuari</th>
+                                    <th>Tipus</th>
+                                    <th>Descripció</th>
+                                    <th>Prioritat</th>
+                                    <th>Acció</th>
+                                    <th>Temps</th>
+                                    <th>Estat</th>
+                                    <th>Acc.</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <footer>
+                    <div>Registre generat: <span id="genTime"></span></div>
+                    <div>Projecte: Xarxa — Control incidències</div>
+                </footer>
+            </main>
+
+            <aside>
+                <div class="card">
+                    <h3 style="margin:0 0 8px">Afegeix / Edita incidència</h3>
+                    <form id="form" class="fade-in">
+                        <div class="row">
+                            <div class="col"><label>Data</label><input type="date" id="fFecha"></div>
+                            <div class="col"><label>Aula</label><input id="fAula" placeholder="Aula "></div>
+                        </div>
+                        <div style="margin-top:8px" class="row">
+                            <div class="col"><label>Usuari</label><input id="fUser" placeholder="Ex: Profe"></div>
+                            <div class="col"><label>Tipus</label><select id="fTipo"><option value="red">Red</option><option value="impresora">Impresora</option><option value="wifi">Wi-Fi</option><option value="server">Server</option><option value="Ordenador">Ordenador</option></select></div>
+                        </div>
+                        <div style="margin-top:8px"><label>Prioritat</label><select id="fPrior"><option>Crítica</option><option>Alta</option><option selected>Mitjana</option><option>Baixa</option></select></div>
+                        <div style="margin-top:8px"><label>Descripció</label><textarea id="fDesc" rows="4" placeholder="Descripció de la incidència..."></textarea></div>
+
+                        <div style="display:flex;gap:8px;margin-top:10px;justify-content:flex-end">
+                            <button type="button" id="clearBtn" class="btn btn-ghost">Cancel·la</button>
+                            <button type="submit" class="btn btn-primary">Afegeix incidència</button>
+                        </div>
+                        <input type="hidden" id="editingId" value="">
+                    </form>
+                </div>
+
+                <div class="card" style="margin-top:12px">
+                    <h4 style="margin:0 0 8px">SLA objectius</h4>
+                    <p class="meta">Incidència crítica (sense Internet): <strong>Resposta inicial &lt; 30 min · Solució &lt; 4 h</strong></p>
+                    <p class="meta">Incidència menor (impresora): <strong>Resposta inicial &lt; 4 h · Solució &lt; 48 h</strong></p>
+                    <hr style="margin:10px 0">
+                    <p class="meta">Pista: registra l'hora de report i l'hora de primera resposta per mesurar els SLA.</p>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <script>
+        // Sample initial incidents
+        const sample = [{
+            id: '001',
+            fecha: '2025-11-05',
+            aula: 'Aula 3',
+            usuario: 'Profe',
+            tipo: 'red',
+            descripcion: 'PC no tiene Internet',
+            prioridad: 'Crítica',
+            accion: 'Reiniciado puerto y comprobado DHCP',
+            tiempo_solucion: '30 min',
+            estado: 'Resuelta'
+        }, {
+            id: '002',
+            fecha: '2025-11-05',
+            aula: 'Aula 2',
+            usuario: 'Profe',
+            tipo: 'wifi',
+            descripcion: 'AP sense cobertura',
+            prioridad: 'Alta',
+            accion: 'Reiniciat AP, revisat SSID i canal',
+            tiempo_solucion: '45 min',
+            estado: 'Resuelta'
+        }, ];
+
+        // Storage key
+        const KEY = 'incidences_xarxa_v1';
+
+        // Utilities
+        function uid() {
+            return Math.random().toString(36).slice(2, 9).toUpperCase();
+        }
+
+        function nowISO() {
+            return new Date().toISOString().slice(0, 10)
+        }
+
+        // State
+        let incidents = load() || sample.slice();
+
+        // Elements
+        const tbody = document.getElementById('tbody');
+        const count = document.getElementById('count');
+        const genTime = document.getElementById('genTime');
+        const filterAula = document.getElementById('filterAula');
+        const filterTipo = document.getElementById('filterTipo');
+        const filterEstado = document.getElementById('filterEstado');
+        const resetFilters = document.getElementById('resetFilters');
+
+        const newBtn = document.getElementById('newBtn');
+        const exportBtn = document.getElementById('exportBtn');
+        const form = document.getElementById('form');
+        const fFecha = document.getElementById('fFecha');
+        const fAula = document.getElementById('fAula');
+        const fUser = document.getElementById('fUser');
+        const fTipo = document.getElementById('fTipo');
+        const fPrior = document.getElementById('fPrior');
+        const fDesc = document.getElementById('fDesc');
+        const editingId = document.getElementById('editingId');
+        const clearBtn = document.getElementById('clearBtn');
+
+        // Init UI
+        fFecha.value = nowISO();
+        genTime.textContent = new Date().toLocaleString();
+
+        function save() {
+            localStorage.setItem(KEY, JSON.stringify(incidents));
+        }
+
+        function load() {
+            try {
+                return JSON.parse(localStorage.getItem(KEY) || 'null')
+            } catch (e) {
+                return null
+            }
+        }
+
+        function populateFilters() {
+            const aulas = Array.from(new Set(incidents.map(i => i.aula))).sort();
+            filterAula.innerHTML = '<option value="Totes">Totes les Aules</option>' + aulas.map(a => `<option>${a}</option>`).join('');
+        }
+
+        function render() {
+            populateFilters();
+            // filter
+            const fa = filterAula.value;
+            const ft = filterTipo.value;
+            const fe = filterEstado.value;
+            const filtered = incidents.filter(it => (fa === 'Totes' || it.aula === fa) && (ft === 'Tots' || it.tipo === ft) && (fe === 'Tots' || it.estado === fe));
+            tbody.innerHTML = '';
+            for (const it of filtered) {
+                const tr = document.createElement('tr');
+                tr.className = 'fade-in';
+                tr.innerHTML = `<td class="id">${it.id}</td><td>${it.fecha}</td><td>${it.aula}</td><td>${it.usuario}</td><td>${it.tipo}</td><td>${it.descripcion}</td><td>${renderPrior(it.prioridad)}</td><td>${it.accion}</td><td>${it.tiempo_solucion||''}</td><td>${renderStatus(it.estado)}</td><td>${renderActions(it.id)}</td>`;
+                tbody.appendChild(tr);
+            }
+            count.textContent = filtered.length;
+            save();
+        }
+
+        function renderPrior(p) {
+            if (p === 'Crítica') return `<span class="badge b-critical">Crítica</span>`;
+            if (p === 'Alta') return `<span class="badge b-high">Alta</span>`;
+            if (p === 'Mitjana') return `<span class="badge b-med">Mitjana</span>`;
+            return `<span class="badge b-low">Baixa</span>`;
+        }
+
+        function renderStatus(s) {
+            if (s === 'Resuelta') return `<span class="status-res">Resuelta</span>`;
+            if (s === 'En procés') return `<span class="status-proc">En procés</span>`;
+            return `<span class="status-new">Nova</span>`;
+        }
+
+        function renderActions(id) {
+            return `<button onclick="markProc('${id}')" class="btn btn-ghost" style="font-size:0.8rem;padding:6px">En procés</button> <button onclick="markRes('${id}')" class="btn btn-success" style="font-size:0.8rem;padding:6px">Marca resuelta</button>`;
+        }
+
+        // Expose global functions for inline onclick
+        window.markProc = function(id) {
+            const it = incidents.find(x => x.id === id);
+            if (!it) return;
+            it.estado = 'En procés';
+            render();
+        }
+        window.markRes = function(id) {
+            const it = incidents.find(x => x.id === id);
+            if (!it) return;
+            const t = prompt('Temps resolució (ex: 30 min)');
+            if (t) it.tiempo_solucion = t;
+            it.estado = 'Resuelta';
+            render();
+        }
+
+        // form submit
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const idEdit = editingId.value;
+            if (idEdit) {
+                const it = incidents.find(x => x.id === idEdit);
+                if (it) {
+                    it.fecha = fFecha.value;
+                    it.aula = fAula.value;
+                    it.usuario = fUser.value;
+                    it.tipo = fTipo.value;
+                    it.prioridad = fPrior.value;
+                    it.descripcion = fDesc.value;
+                }
+                editingId.value = '';
+            } else {
+                const newIt = {
+                    id: uid(),
+                    fecha: fFecha.value,
+                    aula: fAula.value || 'No assignada',
+                    usuario: fUser.value || 'Desconegut',
+                    tipo: fTipo.value || 'red',
+                    descripcion: fDesc.value || 'Sense descripció',
+                    prioridad: fPrior.value || 'Mitjana',
+                    accion: 'Pendiente',
+                    tiempo_solucion: '',
+                    estado: 'Nova'
+                };
+                incidents.unshift(newIt);
+            }
+            render();
+            form.reset();
+            fFecha.value = nowISO();
+        });
+
+        clearBtn.addEventListener('click', () => {
+            form.reset();
+            fFecha.value = nowISO();
+            editingId.value = '';
+        });
+
+        // New button shows form and fills defaults
+        newBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            fFecha.value = nowISO();
+            fAula.focus();
+        });
+
+        resetFilters.addEventListener('click', () => {
+            filterAula.value = 'Totes';
+            filterTipo.value = 'Tots';
+            filterEstado.value = 'Tots';
+            render();
+        });
+
+        // Export CSV
+        exportBtn.addEventListener('click', () => {
+            const header = ['ID', 'Fecha', 'Aula', 'Usuario/Reporta', 'Tipo', 'Descripcio', 'Prioritat', 'Accio', 'Temps resolucio', 'Estat'];
+            const rows = incidents.map(r => [r.id, r.fecha, r.aula, r.usuario, r.tipo, r.descripcion, r.prioridad, r.accion, r.tiempo_solucion, r.estado]);
+            const csv = [header, ...rows].map(r => r.map(c => `"${String(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+            const blob = new Blob([csv], {
+                type: 'text/csv;charset=utf-8;'
+            });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `incidencies_${new Date().toISOString().slice(0,10)}.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        // initial render
+        render();
+    </script>
+</body>
+
+</html>

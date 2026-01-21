@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Formalab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset i base */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        /* Header */
+        
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #ff4e50, #f9d423);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .logo {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+        }
+        
+        .menu-btn {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 1001;
+        }
+        
+        .menu-btn div {
+            width: 28px;
+            height: 3px;
+            background: #fff;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-btn.active div:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: #222;
+        }
+        
+        .menu-btn.active div:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .menu-btn.active div:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: #222;
+        }
+        /* Menú lateral */
+        
+        nav.vertical-menu {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 280px;
+            height: 100%;
+            background: #fff;
+            padding-top: 80px;
+            box-shadow: -4px 0 12px rgba(0, 0, 0, 0.2);
+            transition: right 0.4s ease;
+            z-index: 999;
+        }
+        
+        nav.vertical-menu.active {
+            right: 0;
+        }
+        
+        nav.vertical-menu h3 {
+            padding: 10px 25px;
+            color: #ff4e50;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        
+        nav.vertical-menu ul {
+            list-style: none;
+        }
+        
+        nav.vertical-menu li a {
+            display: block;
+            padding: 12px 35px;
+            color: #444;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        nav.vertical-menu li a:hover {
+            background: #ff4e50;
+            color: #fff;
+            padding-left: 45px;
+        }
+        /* Hero */
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://i.postimg.cc/ZYM1McKB/206015334-digital-technology-background-generative-ai.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+            margin-top: 70px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+        }
+        
+        .hero span {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #f9d423;
+        }
+        /* Cards */
+        
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+            padding: 80px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 35px 20px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            max-width: 90px;
+            margin-bottom: 20px;
+            transition: transform 0.4s;
+        }
+        
+        .card:hover img {
+            transform: rotate(8deg) scale(1.1);
+        }
+        
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #ff4e50;
+        }
+        /* Noticias */
+        
+        .news-section {
+            padding: 80px 40px;
+            background: #fff;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .news-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .news-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #ff4e50;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .news-header h2::after {
+            content: "";
+            width: 60px;
+            height: 3px;
+            background: #f9d423;
+            display: block;
+            margin: 8px auto 0;
+            border-radius: 2px;
+        }
+        
+        .news-header p {
+            color: #666;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+        
+        .news-card {
+            background: #fdfdfd;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        }
+        
+        .news-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .news-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .news-card:hover img {
+            transform: scale(1.1);
+        }
+        
+        .news-date {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff4e50;
+            color: #fff;
+            font-size: 0.9rem;
+            padding: 6px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+        
+        .news-content {
+            padding: 20px;
+        }
+        
+        .news-content h3 {
+            font-size: 1.3rem;
+            color: #222;
+            margin-bottom: 10px;
+        }
+        
+        .news-content p {
+            font-size: 0.95rem;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .news-content a {
+            font-weight: 600;
+            color: #ff4e50;
+            transition: 0.3s;
+        }
+        
+        .news-content a:hover {
+            color: #f9d423;
+        }
+        /* Footer */
+        
+        .footer-extended {
+            background: #111;
+            color: #ddd;
+            padding: 50px 20px;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+        
+        .footer-extended .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 30px;
+        }
+        /* Redes sociales a la izquierda */
+        
+        .footer-social {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-social h4 {
+            color: #f9d423;
+            margin-bottom: 10px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        /* Los iconos se ven siempre y solo escalan al pasar el ratón */
+        
+        .social-icons a img {
+            width: 32px;
+            height: 32px;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover img {
+            transform: scale(1.2);
+        }
+        /* Logo e información a la derecha */
+        
+        .footer-info {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .footer-info img {
+            width: 80px;
+            height: auto;
+        }
+        
+        .footer-info h4 {
+            color: #f9d423;
+            margin-bottom: 8px;
+        }
+        
+        .footer-info p a {
+            color: #ff4e50;
+        }
+        
+        .footer-extended p.copy {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.8rem;
+        }
+        /* Responsive */
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero span {
+                font-size: 1.1rem;
+            }
+            .footer-extended .container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo"> Formalab</div>
+        <div class="menu-btn" onclick="toggleMenu(this)">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <nav id="menu" class="vertical-menu">
+            <h3>Campus professional</h3>
+            <ul>
+                <li><a href="onsom.html">On som</a></li>
+                <li><a href="calendariescolar.html">Calendari escolar</a></li>
+                <li><a href="organigrama.html">Organigrama</a></li>
+                <li><a href="secretaria.html">Secretaria – Atenció al públic</a></li>
+                <li><a href="proveïdors.html">Proveïdors</a></li>
+                <li><a href="incidencies.html">Formulari d'incidències</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- jdid -->
+    <!-- Hero -->
+    <section class="hero">
+        <!-- Fondo animado con partículas -->
+        <div id="particles-js" style="position:absolute; width:100%; height:100%; top:0; left:0; z-index:0;"></div>
+
+        <!-- Contenido del hero -->
+        <div style="position:relative; z-index:1; text-align:center;">
+            <h1> Formalab</h1>
+            <span>Aprendre · Innovar · Créixer</span>
+        </div>
+    </section>
+
+    <!-- Añadir scripts antes de cerrar body -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00bfff"
+                }, // color azul profesional
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.6,
+                    "random": true
+                },
+                "size": {
+                    "value": 3,
+                    "random": true
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00bfff",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 2,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 0.5
+                        }
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+
+    <!-- Cards -->
+    <section class="cards">
+        <a href="estudios.html" class="card">
+            <img src="https://i.postimg.cc/13cPks5h/566985.png" alt="Estudis">
+            <h3>Estudis</h3>
+        </a>
+        <a href="preinscripciones.html" class="card">
+            <img src="https://i.postimg.cc/RhNZm8p1/2620163.png" alt="Preinscripcions">
+            <h3>Preinscripcions</h3>
+        </a>
+        <a href="informacion.html" class="card">
+            <img src="https://i.postimg.cc/wTxLnTkL/pngtree-vector-magnifying-glass-looking-for-information-files-image-1082106-removebg-preview.png" alt="Informació">
+            <h3>Informació</h3>
+        </a>
+        <a href="portes.html" class="card">
+            <img src="https://i.postimg.cc/q7F1v6jP/5949930.png" alt="Portes Obertes">
+            <h3>Portes Obertes</h3>
+        </a>
+    </section>
+
+    <!-- Noticias -->
+    <section class="news-section">
+        <div class="news-header">
+            <h2>Notícies i Sortides</h2>
+            <p>Les últimes novetats i activitats del nostre centre</p>
+        </div>
+        <div class="news-grid">
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="https://i.postimg.cc/CMfqw93S/DSCN4935-scaled-e1733215193958.jpg" alt="Sortida Barcelona">
+                    <span class="news-date">05 Oct 2025</span>
+                </div>
+                <div class="news-content">
+                    <h3>Sortida a Barcelona</h3>
+                    <p>L’alumnat de Grau Mitjà ha visitat els museus de ciència i tecnologia, descobrint noves formes d’aprendre.</p>
+                    <a href="noticia1.html">Llegir més →</a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="https://i.postimg.cc/8z3GknQT/presenprojecpedagogic-9877.jpg" alt="Conferència">
+                    <span class="news-date">20 Set 2025</span>
+                </div>
+                <div class="news-content">
+                    <h3>Conferència d’Innovació</h3>
+                    <p>Experts del sector tecnològic han compartit coneixements amb el nostre alumnat en una jornada inspiradora.</p>
+                    <a href="noticia2.html">Llegir més →</a>
+                </div>
+            </article>
+            <article class="news-card">
+                <div class="news-image">
+                    <img src="https://i.postimg.cc/YCBfctj7/imatge-de-whatsapp-2024-05-07-a-les-19-39-22-5c1884fd-orig.jpg" alt="Projecte escolar">
+                    <span class="news-date">10 Set 2025</span>
+                </div>
+                <div class="news-content">
+                    <h3>Projectes de l’IFE</h3>
+                    <p>L’alumnat de l’IFE ha presentat projectes creatius que uneixen innovació, sostenibilitat i treball en equip.</p>
+                    <a href="noticia3.html">Llegir més →</a>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-extended">
+        <div class="container">
+            <!-- Redes sociales -->
+            <div class="footer-social">
+                <h4>Segueix-nos!</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+                    <a href="https://www.Twitter.com"><img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter"></a>
+                    <a href="https://www.YouTube.com"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube"></a>
+                    <a href="https://www.Instagram.com"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+                </div>
+            </div>
+
+            <!-- Logo e información -->
+            <div class="footer-info">
+                <img src="https://i.postimg.cc/zfHF4p1v/freepik-assistant-1760516621197-removebg-preview.png" alt="Logo Institut Formalab">
+                <div>
+                    <h4> FormaLab</h4>
+                    <p>Carrer de Xavier Puig i Andreu, Lleida<br>Tel: 900 000 000<br>Email: <a href="mailto:formalab@forma.lab">formalab@forma.lab</a></p>
+                    <p><a href="https://maps.app.goo.gl/yCXsE2qx7Jrbgee89" target="_blank">Mapa</a> | <a href="mailto:formalab@forma.lab">Contacte</a>| <a href="profes.html">Profesor</a></p>
+                </div>
+            </div>
+        </div>
+        <p class="copy">© 2025 Formalab. Tots els drets reservats.</p>
+    </footer>
+
+    <script>
+        function toggleMenu(btn) {
+            btn.classList.toggle("active");
+            document.getElementById("menu").classList.toggle("active");
+        }
+    </script>
+</body>
+
+</html>
