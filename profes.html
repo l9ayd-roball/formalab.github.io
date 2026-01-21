@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Portal de Profesores — Aalii</title>
-    <meta name="description" content="Portal profesional para profesores: Classroom, Módulos, Incidencias. Creado por Aalii." />
+    <meta name="description" content="Portal profesional para profesores: Classroom, Moodle, Incidencias. Creado por Aalii." />
     <style>
         /* Reset / base */
         
@@ -257,7 +257,7 @@
             <nav style="margin-left:auto;display:flex;gap:12px;align-items:center">
                 <a href="index.html">Portal</a>
                 <a href="https://edu.google.com/intl/ALL_ca/workspace-for-education/products/classroom">Classroom</a>
-                <a href="module.html">Módulos</a>
+                <a href="module.html">Moodle</a>
                 <a href="incprf.html">Incidencias</a>
                 <button id="logoutBtn" class="btn outline" style="padding:8px 10px">Cerrar sesión</button>
             </nav>
@@ -277,7 +277,7 @@
             <div class="menu" role="navigation" aria-label="Secciones">
                 <button class="active" data-section="dashboard">Resumen</button>
                 <button data-section="classroom">Classroom</button>
-                <button data-section="modules">Módulos</button>
+                <button data-section="modules">Moodle</button>
                 <button data-section="incidencias">Incidencias</button>
                 <button data-section="settings">Ajustes</button>
             </div>
@@ -341,7 +341,7 @@
             </section>
 
             <section id="modules" class="card" data-panel hidden>
-                <h2>Módulos</h2>
+                <h2>Moodle</h2>
                 <p style="color:var(--muted);margin-top:6px">Organiza contenidos por temas y unidades.</p>
                 <div style="margin-top:12px">
                     <label for="moduleSelect">Seleccionar módulo</label>
@@ -519,7 +519,7 @@
 
         // TODOs y sugerencias:
         // - Añadir autenticación (OAuth / SAML) en el backend
-        // - Conectar a API REST para Classroom, módulos e incidencias
+        // - Conectar a API REST para Classroom, Moodle e incidencias
         // - Encriptar datos y usar HTTPS y CORS apropiado
         // - Añadir roles (director, profesor, administrador)
     </script>
